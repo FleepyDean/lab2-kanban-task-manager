@@ -139,3 +139,16 @@ function deleteTask(taskId) {
         updateTaskCounter();
     });
 }
+
+function editTask(taskId) {
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    // Prefill forms
+    titleInput.value = task.title;
+    descInput.value = task.description;
+    priorityInput.value = task.priority;
+    dateInput.value = task.dueDate;
+    
+    openModal('', task.id);
+}
