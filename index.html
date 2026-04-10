@@ -20,6 +20,7 @@
             </select>
         </div>
     </header>
+
     <main class="board">
         <section id="todo" class="column">
             <h2>To Do</h2>
@@ -40,5 +41,31 @@
             <button id="clear-done-btn">Clear All</button>
         </section>
     </main>
+
+    <div id="task-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modal-title">Manage Task</h3>
+            
+            <input type="text" id="task-title-input" placeholder="Task Title" required>
+            <textarea id="task-desc-input" placeholder="Task Description"></textarea>
+            
+            <select id="task-priority-input">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+            
+            <input type="date" id="task-date-input">
+            
+            <input type="hidden" id="current-column-id">
+            <input type="hidden" id="current-task-id">
+            
+            <div class="modal-actions">
+                <button id="save-task-btn">Save</button>
+                <button id="cancel-task-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
