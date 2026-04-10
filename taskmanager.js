@@ -166,3 +166,44 @@ function updateTask(taskId, updatedData) {
         oldCard.parentNode.replaceChild(newCard, oldCard);
     }
 }
+
+// Open modal when Add Task is clicked
+document.querySelectorAll('.add-task-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const targetColumnId = this.getAttribute('data-target');
+        openModal(targetColumnId);
+    });
+});
+
+// Close modal on Cancel
+document.getElementById('cancel-task-btn').addEventListener('click', closeModal);
+
+// Save Task
+document.getElementById('save-task-btn').addEventListener('click', function() {
+    if (!titleInput.value.trim()) {
+        alert("Task title is required!");
+        return;
+    }
+
+    const taskData = {
+        title: titleInput.value.trim(),
+        description: descInput.value.trim(),
+        priority: priorityInput.value,
+        dueDate: dateInput.value
+    };
+
+    const editingTaskIdStr = currentTaskIdInput.value;
+
+    if (editingTaskIdStr) {
+        // Editing an existing task
+        updateTask(parseInt(editingTaskIdStr, 10), taskData);
+    } else {
+        // Adding a new task
+        const columnId = currentColumnId.value;
+        addTask(columnId, taskData);
+    }
+
+    closeModal();
+});
+
+
