@@ -9,3 +9,24 @@ const dateInput = document.getElementById('task-date-input');
 const currentColumnId = document.getElementById('current-column-id');
 const currentTaskIdInput = document.getElementById('current-task-id');
 const taskCounter = document.getElementById('task-counter');
+
+function updateTaskCounter() {
+    taskCounter.textContent = tasks.length;
+}
+
+function openModal(columnId = '', taskId = '') {
+    currentColumnId.value = columnId;
+    currentTaskIdInput.value = taskId;
+    modal.classList.remove('hidden');
+}
+
+function closeModal() {
+    modal.classList.add('hidden');
+    // Clear inputs
+    titleInput.value = '';
+    descInput.value = '';
+    priorityInput.value = 'high';
+    dateInput.value = '';
+    currentColumnId.value = '';
+    currentTaskIdInput.value = '';
+}
