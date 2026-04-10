@@ -206,4 +206,30 @@ document.getElementById('save-task-btn').addEventListener('click', function() {
     closeModal();
 });
 
+// Task 3 Starts Here
+// Event Delegation
+document.querySelectorAll('.task-list').forEach(list => {
+    list.addEventListener('click', function(event) {
+        const action = event.target.getAttribute('data-action');
+        const idStr = event.target.getAttribute('data-id');
 
+        if (!action || !idStr) return;
+
+        const taskId = parseInt(idStr, 10);
+
+        if (action === 'delete') deleteTask(taskId);
+        if (action === 'edit') editTask(taskId);
+    });
+});
+
+// Priority Filter
+document.getElementById('priority-filter').addEventListener('change', function(event) {
+    const selectedPriority = event.target.value;
+    const allCards = document.querySelectorAll('.task-card');
+
+    allCards.forEach(card => {
+        const cardPriority = card.getAttribute('data-priority');
+        const shouldHide = selectedPriority !== 'all' && cardPriority !== selectedPriority;
+        card.classList.toggle('is-hidden', shouldHide);
+    });
+});
