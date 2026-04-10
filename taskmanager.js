@@ -127,3 +127,15 @@ function addTask(columnId, taskObj) {
     
     updateTaskCounter();
 }
+
+function deleteTask(taskId) {
+    const card = document.querySelector(`li[data-id="${taskId}"]`);
+    if (!card) return;
+
+    card.classList.add('fade-out');
+    card.addEventListener('transitionend', () => {
+        card.remove();
+        tasks = tasks.filter(t => t.id !== taskId);
+        updateTaskCounter();
+    });
+}
