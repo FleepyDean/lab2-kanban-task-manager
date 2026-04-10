@@ -233,3 +233,22 @@ document.getElementById('priority-filter').addEventListener('change', function(e
         card.classList.toggle('is-hidden', shouldHide);
     });
 });
+
+// Clear
+document.getElementById('clear-done-btn').addEventListener('click', function() {
+    const doneList = document.getElementById('done-list');
+    const doneCards = Array.from(doneList.children);
+
+    doneCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.classList.add('fade-out');
+            
+            card.addEventListener('transitionend', () => {
+                const taskId = parseInt(card.getAttribute('data-id'), 10);
+                tasks = tasks.filter(t => t.id !== taskId);
+                card.remove();
+                updateTaskCounter();
+            });
+        }, index * 100);
+    });
+});
