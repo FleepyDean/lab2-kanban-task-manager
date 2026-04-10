@@ -152,3 +152,17 @@ function editTask(taskId) {
     
     openModal('', task.id);
 }
+
+function updateTask(taskId, updatedData) {
+    const taskIndex = tasks.findIndex(t => t.id === taskId);
+    if (taskIndex === -1) return;
+
+    tasks[taskIndex] = { ...tasks[taskIndex], ...updatedData };
+    const updatedTask = tasks[taskIndex];
+
+    const oldCard = document.querySelector(`li[data-id="${taskId}"]`);
+    if (oldCard) {
+        const newCard = createTaskCard(updatedTask);
+        oldCard.parentNode.replaceChild(newCard, oldCard);
+    }
+}
